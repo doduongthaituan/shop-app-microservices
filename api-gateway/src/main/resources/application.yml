@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/v1/product
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/v1/order
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        cloud:
+        gateway: TRACE
+server:
+  port: 8082
